@@ -1,68 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dynamic Table</title>
-    <style>
-        table, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-            padding: 8px;
-        }
-    </style>
+  <title>Dynamic Table</title>
 </head>
 <body>
 
-    <button onclick="createTable()">Create the table</button>
+<input type="button" value="Create the table" onclick="createTable()">
 
-    <table id="myTable"></table>
+<table id="myTable"></table>
 
-    <script>
-        function createTable() {
+<script>
+function createTable() {
 
-            // Prompt for rows
-            let rn = prompt("Input number of rows");
+    let rn = prompt("Input number of rows");
+    let cn = prompt("Input number of columns");
 
-            // Prompt for columns
-            let cn = prompt("Input number of columns");
+    rn = Number(rn);
+    cn = Number(cn);
 
-            // Convert to number
-            rn = Number(rn);
-            cn = Number(cn);
+    if (isNaN(rn) || isNaN(cn)) {
+        return;
+    }
 
-            // Check if input is not a number
-            if (isNaN(rn) || isNaN(cn)) {
-                return;
-            }
+    if (rn <= 0 || cn <= 0) {
+        alert("Please enter positive numbers greater than 0");
+        return;
+    }
 
-            // Check for zero or negative
-            if (rn <= 0 || cn <= 0) {
-                alert("Please enter positive numbers greater than 0");
-                return;
-            }
+    const table = document.getElementById("myTable");
+    table.innerHTML = "";
 
-            const table = document.getElementById("myTable");
+    for (let i = 0; i < rn; i++) {
+        let row = document.createElement("tr");
 
-            // Clear previous table data
-            table.innerHTML = "";
-
-            // Create rows
-            for (let i = 0; i < rn; i++) {
-
-                let row = document.createElement("tr");
-
-                // Create columns
-                for (let j = 0; j < cn; j++) {
-
-                    let cell = document.createElement("td");
-                    cell.textContent = `Row-${i} Column-${j}`;
-                    row.appendChild(cell);
-
-                }
-
-                table.appendChild(row);
-            }
+        for (let j = 0; j < cn; j++) {
+            let cell = document.createElement("td");
+            cell.textContent = `Row-${i} Column-${j}`;
+            row.appendChild(cell);
         }
-    </script>
+
+        table.appendChild(row);
+    }
+}
+</script>
 
 </body>
 </html>
