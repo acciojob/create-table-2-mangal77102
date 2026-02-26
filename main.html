@@ -1,25 +1,68 @@
 <!DOCTYPE html>
-
 <html>
+<head>
+    <title>Dynamic Table</title>
+    <style>
+        table, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
 
-	<head>
-		<meta charset=utf-8 /> 
-		<title>Create a table</title> 
-		<style type="text/css"> 
-			body {margin: 30px;} 	
-		</style>
-		<link rel="stylesheet" href="styles.css">
-	</head>
+    <button onclick="createTable()">Create the table</button>
 
-	<body>
-		<table id="myTable" border="1"> 
-		</table>
-		<form> 
-			<input type="button" onclick="createTable()" value="Create the table"> 
-		</form>
-		<script type="text/javascript" src="./script.js">
-	</script>
+    <table id="myTable"></table>
 
-	</body>
+    <script>
+        function createTable() {
 
+            // Prompt for rows
+            let rn = prompt("Input number of rows");
+
+            // Prompt for columns
+            let cn = prompt("Input number of columns");
+
+            // Convert to number
+            rn = Number(rn);
+            cn = Number(cn);
+
+            // Check if input is not a number
+            if (isNaN(rn) || isNaN(cn)) {
+                return;
+            }
+
+            // Check for zero or negative
+            if (rn <= 0 || cn <= 0) {
+                alert("Please enter positive numbers greater than 0");
+                return;
+            }
+
+            const table = document.getElementById("myTable");
+
+            // Clear previous table data
+            table.innerHTML = "";
+
+            // Create rows
+            for (let i = 0; i < rn; i++) {
+
+                let row = document.createElement("tr");
+
+                // Create columns
+                for (let j = 0; j < cn; j++) {
+
+                    let cell = document.createElement("td");
+                    cell.textContent = `Row-${i} Column-${j}`;
+                    row.appendChild(cell);
+
+                }
+
+                table.appendChild(row);
+            }
+        }
+    </script>
+
+</body>
 </html>
